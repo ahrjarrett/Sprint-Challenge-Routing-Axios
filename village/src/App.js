@@ -7,7 +7,7 @@ import Smurfs from './components/Smurfs';
 
 class App extends Component {
   state = {
-    smurfs: []
+    smurfs: [],
   }
 
   componentDidMount = () => {
