@@ -1,8 +1,19 @@
 import React, { Component } from 'react';
+import axios from 'axios'
 
 import Smurf from './Smurf';
 
 class Smurfs extends Component {
+
+  handleDelete = e => {
+    e.preventDefault()
+    const id = e.target.name
+    axios({
+      method: 'DELETE',
+      url: `http://localhost:3333/smurfs/${id}`
+    })
+  }
+
   render() {
     return (
       <div className="Smurfs">
@@ -17,7 +28,14 @@ class Smurfs extends Component {
                   age={smurf.age}
                   height={smurf.height}
 		  />
-		<span><a href="">Delete Smurf</a></span>
+		<span>
+		  <a
+		    onClick={this.handleDelete}
+		    name={smurf.id}
+		    href=""
+		    >Delete Smurf
+		  </a>
+		</span>
 	      </div>
             );
           })}
