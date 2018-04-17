@@ -4,6 +4,21 @@ import axios from 'axios'
 import Smurf from './Smurf';
 
 class Smurfs extends Component {
+  state = {
+    smurfs: [],
+  }
+
+  componentDidMount = () => {
+    this.getSmurfs()
+  }
+
+  getSmurfs = () => {
+    axios({
+      url: 'http://localhost:3333/smurfs',
+      method: 'GET',
+    })
+    .then(response => this.setState(() => ({ smurfs: response.data })))
+  }
 
   handleDelete = e => {
     e.preventDefault()
@@ -12,6 +27,7 @@ class Smurfs extends Component {
       method: 'DELETE',
       url: `http://localhost:3333/smurfs/${id}`
     })
+      .then()
   }
 
   render() {
@@ -19,7 +35,7 @@ class Smurfs extends Component {
       <div className="Smurfs">
         <h1>Smurf Village</h1>
         <ul>
-          {this.props.smurfs.map(smurf => {
+          {this.state.smurfs.map(smurf => {
             return (
 	      <div key={smurf.id}>
 		<Smurf
